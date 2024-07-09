@@ -5,10 +5,9 @@ import azure.functions as func
 
 def main(event: func.EventGridEvent):
 
-	logging.info('Function triggered to process a message: ', event.get_body())
-    logging.info('  EnqueuedTimeUtc =', event.enqueued_time)
-    logging.info('  SequenceNumber =', event.sequence_number)
-    logging.info('  Offset =', event.offset)
+    logging.info('Starting Event Grid Trigger...')
+    logging.info(f'Function triggered to process a message: {event.id}')
+    logging.info(f'  EventTime = {event.event_time}')
 
     result = json.dumps({
         'id': event.id,
@@ -18,8 +17,7 @@ def main(event: func.EventGridEvent):
         'event_type': event.event_type,
     })
 
-
-    logging.info('Python EventGrid trigger processed an event: %s', result)
+    logging.info(f'Python EventGrid trigger processed an event: {result}')
 
 
 
